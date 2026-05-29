@@ -34,7 +34,7 @@ class TraceLogger(FileLogger):
 
         row_start = ["userid", "Date", "Event", "Pod_name"]
         pod_resources_name = [f"Pod_{res}" for res in pod_resources] if pod_resources else []
-        row_mid = ["Pod_start", "Pod_end", "Pod_duration", "Node_name", "Node_type"]
+        row_mid = ["Pod_start", "Pod_end", "Pod_duration", "Pod_effective_duration", "Node_name", "Node_type"]
         node_resources_name = [f"Node_{res}" for res in node_resources] if node_resources else []
         row = row_start + pod_resources_name + row_mid + node_resources_name
         return row
@@ -54,6 +54,7 @@ class TraceLogger(FileLogger):
                 pod.start_time,
                 pod.end_time,
                 pod.duration,
+                pod.effective_duration,
                 pod.node.name if pod.node else "N/A",
                 pod.node.node_type if pod.node else "",
                 *(pod.node.resources_capacity.values() if pod.node else "")

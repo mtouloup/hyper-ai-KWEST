@@ -233,6 +233,9 @@ class SimulationStatistics:
                 "arrival": pod.arrival_time,
                 "start": pod.start_time,
                 "end": pod.end_time,
+                "baseline_duration": pod.duration,
+                "effective_duration": pod.effective_duration,
+                "node_type": pod.node.node_type if pod.node else None,
                 "status": status
             })
 
@@ -312,6 +315,18 @@ class SimulationStatistics:
             metrics[f"max_{resource}_util"] = lb_agg.get(f"max_{resource}", 0)
             metrics[f"avg_{resource}_util"] = lb_agg.get(f"avg_{resource}", 0)
             metrics[f"std_{resource}_util"] = lb_agg.get(f"std_{resource}", 0)
+
+        # Node-aware execution time metrics
+        baseline_durations = [p['baseline_duration'] for p in completed if p.get('baseline_duration') is not None]
+        effective_durations = [p['effective_duration'] for p in completed if p.get('effective_duration') is not None]
+        slowdown_ratios = [
+            e / b for b, e in zip(baseline_durations, effective_durations) if b and b > 0
+        ]
+        metrics.update({
+            "avg_baseline_duration": float(np.mean(baseline_durations)) if baseline_durations else 0,
+            "avg_effective_duration": float(np.mean(effective_durations)) if effective_durations else 0,
+            "avg_execution_slowdown": float(np.mean(slowdown_ratios)) if slowdown_ratios else 1.0,
+        })
 
         # Reward-aligned evaluation metrics
         metrics.update({

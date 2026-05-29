@@ -185,6 +185,16 @@ workload_warm_up_spike_factor:
 workload_smoothing_alpha:
   { type: normal, mean: 0.5, stdev: 0.4, min: 0.4, max: 0.9, round: 3 }
 
+# Node-Aware Execution Time Modeling
+# When enabled, pod execution duration is scaled based on the node it is scheduled on.
+# mode: "node_type" uses fixed per-type factors; "cpu_based" derives factor from node CPU capacity.
+simulation_node_aware_execution: False  # set to True to enable node-aware pod execution time
+simulation_node_aware_execution_mode: node_type  # node_type or cpu_based
+simulation_node_aware_cloud_factor: 1.0   # cloud nodes run at full speed (baseline)
+simulation_node_aware_edge_factor: 2.0    # edge nodes are 2x slower than cloud
+simulation_node_aware_iot_factor: 4.0     # IoT nodes are 4x slower than cloud
+simulation_node_aware_reference_cpu: 8000 # reference CPU (millicores) for cpu_based mode
+
 # Simulation
 simulation_speedup: 0 # 1=real-time, 0=infinite, other numbers=speedup factor
 simulation_seed: 20 # Empty for fully random, any other number for reproduciable runs
