@@ -26,6 +26,7 @@ class TraceLogger(FileLogger):
         self.save_trace = config.get('simulation_save_trace', False)
         if self.save_trace:
             self.initialize(config, log_file)
+            self._num_data_cols = len(self.build_header(config)) - 3  # excludes userid, Date, Event
 
     def build_header(self, config) -> list[str]:
         # Build trace header
@@ -60,6 +61,6 @@ class TraceLogger(FileLogger):
                 *(pod.node.resources_capacity.values() if pod.node else "")
             ]
         else:
-            row = [self.uid, datetime.now().isoformat(), event_type, *[""] * 14]
+            row = [self.uid, datetime.now().isoformat(), event_type, *[""] * self._num_data_cols]
 
         self.write_row(row)

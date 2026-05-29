@@ -14,6 +14,7 @@
 # 
 # SPDX-License-Identifier: Apache-2.0
 
+import csv
 from cutsimulator.logger.file_logger import FileLogger
 
 # A logger to save basic statistics in a CSV file (one row per simulation)
@@ -28,9 +29,31 @@ class BasicStatsLogger(FileLogger):
     def build_header(self, config) -> list[str]:
         return [] # Not used
 
+    def _ensure_columns(self, expected_header: list[str]):
+        """Add any missing columns to the CSV header row in-place."""
+        from cutsimulator.utils.logging import to_exp_abs
+        path = to_exp_abs(self.log_file)
+        if not path.exists() or path.stat().st_size == 0:
+            return
+        with open(path, newline='') as f:
+            rows = list(csv.reader(f))
+        if not rows:
+            return
+        existing = rows[0]
+        missing = [c for c in expected_header if c not in existing]
+        if missing:
+            rows[0] = existing + missing
+            # Pad all data rows with empty strings for the new columns
+            for i in range(1, len(rows)):
+                rows[i] = rows[i] + [""] * len(missing)
+            with open(path, 'w', newline='') as f:
+                csv.writer(f).writerows(rows)
+
     def log(self, metrics: dict):
         if self.save_stats:
-            self.initialize(self.config, self.log_file, ["userid"] + list(metrics.keys()))
+            expected_header = ["userid"] + list(metrics.keys())
+            self._ensure_columns(expected_header)
+            self.initialize(self.config, self.log_file, expected_header)
             self.write_row([
                 self.uid,
                 *[round(v, 6) if isinstance(v, float) else v for v in metrics.values()]

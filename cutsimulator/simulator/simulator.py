@@ -82,15 +82,17 @@ class Simulator:
                     self._simulate_time_passing(next_arrival_time)
 
                     node = scheduler.schedule(pod)
+                    # Compute effective duration before deploy so K8s/KWOK manifests can use it
+                    if node is not None:
+                        pod.effective_duration = self.execution_time_model.compute_effective_duration(
+                            pod.duration, node
+                        )
                     deployed = cluster.deploy_pod(pod, node)
 
                     if deployed:
                         # Pod was successfully deployed
                         pod.status = PodStatus.RUNNING
                         pod.start_time = next_arrival_time
-                        pod.effective_duration = self.execution_time_model.compute_effective_duration(
-                            pod.duration, node
-                        )
                         pod.end_time = next_arrival_time + pod.effective_duration
                         scheduler.onPodDeployed(pod)
                         heapq.heappush(active_pods, (pod.end_time, pod))
