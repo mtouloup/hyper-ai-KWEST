@@ -20,13 +20,14 @@ import time
 from typing import List
 
 from cutsimulator.cluster.cluster import Cluster
+from cutsimulator.execution.execution_time_model import ExecutionTimeModel
 from cutsimulator.logger.reward_logger import RewardLogger
 from cutsimulator.logger.trace_logger import TraceLogger
 from cutsimulator.reward.reward_selector import RewardSelector
 from cutsimulator.scheduler.scheduler import Scheduler
 from cutsimulator.workload.pod import PodStatus
 from cutsimulator.workload.task import Task
-from cutsimulator.evaluation.simulation_statistics import PodSchedulingStatus, SimulationStatistics  
+from cutsimulator.evaluation.simulation_statistics import PodSchedulingStatus, SimulationStatistics
 import logging
 logger = logging.getLogger(__name__)
 
@@ -41,6 +42,7 @@ class Simulator:
         self.compute_node_utilization = config.get('simulation_save_node_utilization', False)
         self.stats = SimulationStatistics(config, random_env)
         self.reward_fn = None
+        self.execution_time_model = ExecutionTimeModel(config)
 
     def run_simulation(self, cluster: Cluster, scheduler: Scheduler, tasks: List[Task]):
         if self.save_trace:
@@ -86,7 +88,10 @@ class Simulator:
                         # Pod was successfully deployed
                         pod.status = PodStatus.RUNNING
                         pod.start_time = next_arrival_time
-                        pod.end_time = next_arrival_time + pod.duration
+                        pod.effective_duration = self.execution_time_model.compute_effective_duration(
+                            pod.duration, node
+                        )
+                        pod.end_time = next_arrival_time + pod.effective_duration
                         scheduler.onPodDeployed(pod)
                         heapq.heappush(active_pods, (pod.end_time, pod))
                         self.stats.record_pod_event(pod, PodSchedulingStatus.SUCCESS)

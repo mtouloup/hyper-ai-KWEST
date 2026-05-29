@@ -33,7 +33,8 @@ class Pod:
                 warm_up_duration=None, warm_up_spike_factor=None, smoothing_alpha=None):
         self.name = name
         self.resources = resources.copy()
-        self.duration = duration
+        self.duration = duration          # baseline duration sampled at workload generation time
+        self.effective_duration = duration  # actual duration after node-aware scaling (set at scheduling time)
         self.arrival_time = arrival_time
         self.start_time = None
         self.end_time = None
@@ -61,5 +62,5 @@ class Pod:
 
     def __repr__(self):
         representation = f"Pod(name={self.name}, requested_resources={self.resources}"
-        representation += f", duration={self.duration}, arrival_time={self.arrival_time})"
+        representation += f", duration={self.duration}, effective_duration={self.effective_duration}, arrival_time={self.arrival_time})"
         return representation
