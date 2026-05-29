@@ -115,6 +115,9 @@ All settings are defined in a **single flattened YAML** (`configs/config.yaml`):
 - `simulation_speedup`, `simulation_seed`
 - `simulation_save_trace`, `simulation_save_basic_stats`, `simulation_save_detail_stats`
 - `simulation_save_node_utilization`, `simulation_node_utilization_interval`
+- `simulation_node_aware_execution`, `simulation_node_aware_execution_mode`
+- `simulation_node_aware_cloud_factor`, `simulation_node_aware_edge_factor`, `simulation_node_aware_iot_factor`
+- `simulation_node_aware_reference_cpu`
 
 **🔹 Training Parameters**
 
@@ -205,6 +208,54 @@ For the workload pods distribution, there are three additional options:
 - `min_util`: minimum resource utilization express as a percent of the request
 
 The options `max_over_perc` and `min_util` are used only when `simulation_save_node_utilization` is enabled.
+
+---
+
+## Node-Aware Pod Execution Time
+
+By default, all pods complete after their sampled baseline duration regardless of where they are scheduled. Enabling **node-aware execution time** scales that duration based on the characteristics of the assigned node, reflecting the real-world reality that cloud nodes execute workloads faster than edge or IoT devices.
+
+### Enabling the feature
+
+Set `simulation_node_aware_execution: True` in `configs/config.yaml`. The feature is **disabled by default** so existing simulations are unaffected.
+
+### Scaling modes
+
+| Mode | Parameter | Behaviour |
+|---|---|---|
+| `node_type` (default) | `simulation_node_aware_execution_mode: node_type` | Applies a fixed slowdown factor per node type |
+| `cpu_based` | `simulation_node_aware_execution_mode: cpu_based` | Derives the factor from `reference_cpu / node_cpu_capacity` |
+
+### Configuration parameters
+
+| Parameter | Default | Description |
+|---|---|---|
+| `simulation_node_aware_execution` | `False` | Enable/disable node-aware execution time |
+| `simulation_node_aware_execution_mode` | `node_type` | Scaling mode: `node_type` or `cpu_based` |
+| `simulation_node_aware_cloud_factor` | `1.0` | Slowdown factor for cloud nodes (baseline) |
+| `simulation_node_aware_edge_factor` | `2.0` | Slowdown factor for edge nodes (2× slower than cloud) |
+| `simulation_node_aware_iot_factor` | `4.0` | Slowdown factor for IoT nodes (4× slower than cloud) |
+| `simulation_node_aware_reference_cpu` | `8000` | Reference CPU in millicores for `cpu_based` mode |
+
+### Example
+
+```yaml
+simulation_node_aware_execution: True
+simulation_node_aware_execution_mode: node_type
+simulation_node_aware_cloud_factor: 1.0
+simulation_node_aware_edge_factor: 2.0
+simulation_node_aware_iot_factor: 4.0
+```
+
+With a pod baseline duration of 30 s:
+- Cloud node → effective duration **30 s**
+- Edge node → effective duration **60 s**
+- IoT node → effective duration **120 s**
+
+### Output changes
+
+- `simulation_trace.csv` gains a `Pod_effective_duration` column alongside the existing `Pod_duration` (baseline) column.
+- `simulation_basic_stats.csv` gains three new fields: `avg_baseline_duration`, `avg_effective_duration`, and `avg_execution_slowdown`.
 
 ---
 
