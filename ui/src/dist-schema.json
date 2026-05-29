@@ -1,0 +1,7 @@
+{
+  "fixed":   ["value"],
+  "normal":  ["mean", "stdev", "min", "max", "round"],
+  "poisson": ["mean", "min", "max"],
+  "uniform": ["min", "max"],
+  "pareto":  ["alpha", "min", "max", "round"]
+}

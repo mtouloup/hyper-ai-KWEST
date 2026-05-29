@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Node
+metadata:
+  name: kind-control-plane
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: kind-control-plane
+    kubernetes.io/os: linux
+    node-role.kubernetes.io/control-plane: ''
+  annotations:
+    node.alpha.kubernetes.io/ttl: '0'
+    volumes.kubernetes.io/controller-managed-attach-detach: 'true'
+spec:
+  taints: []
+status:
+  capacity:
+    cpu: '16'
+    ephemeral-storage: 102626232Ki
+    hugepages-1Gi: '0'
+    hugepages-2Mi: '0'
+    memory: 65542296Ki
+    pods: '110'
+  allocatable:
+    cpu: '16'
+    ephemeral-storage: 102626232Ki
+    hugepages-1Gi: '0'
+    hugepages-2Mi: '0'
+    memory: 65542296Ki
+    pods: '110'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node

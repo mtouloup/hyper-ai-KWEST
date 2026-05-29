@@ -1,0 +1,157 @@
+import { NextResponse } from "next/server";
+import { spawn } from "child_process";
+import path from "path";
+import os from "os";
+import fs from "fs/promises";
+import {
+  createRunRecord,
+  updateRunRecord,
+  RunStatus,
+  buildConfig,
+  collectCsvFiles,
+} from "@/lib/runStore";
+import { getTraceRecord, parseTrace } from "@/lib/readTrace";
+import { getWorkloadsCollection } from "@/lib/server/couchbase";
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json().catch(() => ({}));
+
+    const name: string = body.name;
+
+    console.log("body.simConfig ===>>>", body.simConfig);
+    // const simConfigText: string = Object.values(
+    //   body.simConfig.customConfigs
+    // ).some((v: any) => v === null)
+    //   ? body.simConfig.configFile
+    //   : await buildConfig(
+    //       body.simConfig.customConfigs,
+    //       body.simConfig.configFile
+    //     );
+
+    const simConfigText: string =
+      typeof body.simConfig !== "string"
+        ? await buildConfig(
+            body.simConfig.customConfigs,
+            body.simConfig.configFile,
+            {
+              mode: body.mode ?? null,
+              trace: body.traceConfig ?? null,
+              nodesConfig: body.nodesConfig ?? null,
+            },
+          )
+        : body.simConfig;
+
+    console.log("Simulation config text:", simConfigText);
+
+    console.log("Node config:", body.nodesConfig);
+    const nodesConfig: string | null = body.nodesConfig || null;
+    const traceId: string = body.traceConfig || null;
+
+    const repoRoot = path.join(process.cwd(), "..");
+    const simController = path.join(
+      repoRoot,
+      "scripts",
+      "simulation_controller.py",
+    );
+
+    const run = await createRunRecord({
+      name,
+      simConfig: "",
+      nodesConfig,
+      trace: traceId,
+    });
+
+    const runDir = path.join(os.tmpdir(), "sim-runs", run.runId);
+    await fs.mkdir(runDir, { recursive: true });
+
+    const simConfigPath = path.join(runDir, "config.yaml");
+    await fs.writeFile(simConfigPath, simConfigText, "utf8");
+
+    let tracePath: string | null = null;
+    let nodesConfigPath: string | null = null;
+    if (traceId) {
+      let traceJson = await getTraceRecord(traceId);
+
+      if (traceJson === null) {
+        const trimmed = traceId.trimStart();
+        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+          traceJson = JSON.parse(traceId);
+        } else {
+          // Assume CSV — parse and persist to DB for future reuse
+          traceJson = parseTrace(traceId);
+        }
+        const newTraceId = `trace_${Math.random().toString(16).slice(2, 10)}`;
+        const collection = await getWorkloadsCollection();
+        await collection.upsert(newTraceId, traceJson);
+      }
+
+      tracePath = path.join(runDir, "trace.json");
+      await fs.writeFile(tracePath, JSON.stringify(traceJson), "utf8");
+    }
+
+    if (nodesConfig) {
+      nodesConfigPath = path.join(runDir, "nodes_config.yaml");
+      await fs.writeFile(nodesConfigPath, nodesConfig, "utf8");
+    }
+
+    const env = {
+      ...process.env,
+      RUN_ID: run.runId,
+    };
+
+    const args: string[] = [simController, simConfigPath];
+
+    if (nodesConfigPath) args.push("--nodes", nodesConfigPath);
+    if (tracePath) args.push("--trace", tracePath);
+
+    console.log("Running simulation with args:", args.join(" "));
+    const child = spawn("python3", args, {
+      cwd: runDir,
+      env,
+      stdio: "inherit",
+    });
+
+    await updateRunRecord(run.runId, {
+      simulatorPid: child.pid,
+      simConfigPath,
+      status: "running",
+    });
+
+    child.on("exit", async (code) => {
+      try {
+        const status: RunStatus = code === 0 ? "completed" : "failed";
+
+        const { csvs, csvFiles } = await collectCsvFiles(runDir);
+
+        const persistDir = path.join(repoRoot, "sim-results", run.runId);
+        await fs.mkdir(persistDir, { recursive: true });
+
+        for (const f of csvs) {
+          await fs.copyFile(path.join(runDir, f), path.join(persistDir, f));
+        }
+
+        await updateRunRecord(run.runId, {
+          status,
+          finishedAt: new Date().toISOString(),
+          csvFiles,
+        });
+      } finally {
+        await fs.rm(runDir, { recursive: true, force: true }).catch(() => {});
+      }
+    });
+
+    return NextResponse.json({
+      ...run,
+      mode: body.mode,
+      simulatorPid: child.pid,
+      simConfigPath,
+    });
+  } catch (err) {
+    console.error("[run-simulation] POST error:", err);
+    return NextResponse.json(
+      { error: "Failed to create simulation run", details: String(err) },
+      { status: 500 },
+    );
+  }
+}

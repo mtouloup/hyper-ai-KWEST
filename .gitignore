@@ -1,0 +1,8 @@
+.vscode
+*.csv
+*.log
+*.egg-info/
+qmix_latest.pth
+venv
+__pycache__/
+.env.local

@@ -1,0 +1,563 @@
+{
+  "cluster": {
+    "fields": [
+      {
+        "key": "cluster_type",
+        "kind": "dropdown",
+        "label": "Cluster Type",
+        "required": true,
+        "options": ["KWOK", "Python", "K8s"],
+        "defaultValue": "K8s"
+      },
+      {
+        "key": "cluster_reset",
+        "kind": "boolean",
+        "label": "Cluster Reset",
+        "required": true,
+        "defaultValue": "True"
+      },
+      {
+        "key": "cluster_nodes_cloud",
+        "kind": "scalar",
+        "label": "Cloud Nodes",
+        "required": true,
+        "defaultValue": "4"
+      },
+      {
+        "key": "cluster_nodes_edge",
+        "kind": "scalar",
+        "label": "Edge Nodes",
+        "required": true,
+        "defaultValue": "3"
+      },
+      {
+        "key": "cluster_nodes_iot",
+        "kind": "scalar",
+        "label": "IoT Nodes",
+        "required": true,
+        "defaultValue": "3"
+      },
+      {
+        "key": "cluster_node_cloud_cpu_dist",
+        "kind": "dist",
+        "label": "Cloud CPU Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "24000",
+          "stdev": "8000",
+          "min": "8000",
+          "max": "64000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_cloud_mem_dist",
+        "kind": "dist",
+        "label": "Cloud Memory Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "48000",
+          "stdev": "16000",
+          "min": "16000",
+          "max": "128000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_cloud_stg_dist",
+        "kind": "dist",
+        "label": "Cloud Storage Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "4000",
+          "stdev": "2000",
+          "min": "1000",
+          "max": "10000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_cloud_bdw_dist",
+        "kind": "dist",
+        "label": "Cloud Bandwidth Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "10000",
+          "stdev": "4000",
+          "min": "1000",
+          "max": "100000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_cloud_max_pods",
+        "kind": "scalar",
+        "label": "Cloud Max Pods",
+        "required": true,
+        "defaultValue": "110"
+      },
+      {
+        "key": "cluster_node_edge_cpu_dist",
+        "kind": "dist",
+        "label": "Edge CPU Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "6000",
+          "stdev": "2000",
+          "min": "3000",
+          "max": "10000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_edge_mem_dist",
+        "kind": "dist",
+        "label": "Edge Memory Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "12000",
+          "stdev": "4000",
+          "min": "6000",
+          "max": "20000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_edge_stg_dist",
+        "kind": "dist",
+        "label": "Edge Storage Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "500",
+          "stdev": "250",
+          "min": "50",
+          "max": "2000",
+          "round": "-1"
+        }
+      },
+      {
+        "key": "cluster_node_edge_bdw_dist",
+        "kind": "dist",
+        "label": "Edge Bandwidth Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "1000",
+          "stdev": "200",
+          "min": "200",
+          "max": "10000",
+          "round": "-1"
+        }
+      },
+      {
+        "key": "cluster_node_edge_max_pods",
+        "kind": "scalar",
+        "label": "Edge Max Pods",
+        "required": true,
+        "defaultValue": "50"
+      },
+      {
+        "key": "cluster_node_iot_cpu_dist",
+        "kind": "dist",
+        "label": "IoT CPU Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "2000",
+          "stdev": "500",
+          "min": "500",
+          "max": "4000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_iot_mem_dist",
+        "kind": "dist",
+        "label": "IoT Memory Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "4000",
+          "stdev": "1000",
+          "min": "1000",
+          "max": "8000",
+          "round": "-2"
+        }
+      },
+      {
+        "key": "cluster_node_iot_stg_dist",
+        "kind": "dist",
+        "label": "IoT Storage Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "16",
+          "stdev": "4",
+          "min": "1",
+          "max": "32",
+          "round": "0"
+        }
+      },
+      {
+        "key": "cluster_node_iot_bdw_dist",
+        "kind": "dist",
+        "label": "IoT Bandwidth Dist",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "500",
+          "stdev": "200",
+          "min": "100",
+          "max": "1000",
+          "round": "-1"
+        }
+      },
+      {
+        "key": "cluster_node_iot_max_pods",
+        "kind": "scalar",
+        "label": "IoT Max Pods",
+        "required": true,
+        "defaultValue": "30"
+      }
+    ]
+  },
+
+  "workload": {
+    "fields": [
+      {
+        "key": "workload_tasks",
+        "kind": "scalar",
+        "label": "Tasks",
+        "required": true,
+        "defaultValue": "20"
+      },
+      {
+        "key": "workload_pods_number_dist",
+        "kind": "dist",
+        "label": "Pods Number Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "pareto",
+          "alpha": "2",
+          "min": "2",
+          "max": "8",
+          "round": "0"
+        }
+      },
+      {
+        "key": "workload_pods_cpu_dist",
+        "kind": "dist",
+        "label": "Pods CPU Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "1000",
+          "stdev": "1000",
+          "min": "500",
+          "max": "4000",
+          "round": "-2",
+          "max_over_perc": "0.10",
+          "min_util": "0.05"
+        }
+      },
+      {
+        "key": "workload_pods_mem_dist",
+        "kind": "dist",
+        "label": "Pods Memory Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "2000",
+          "stdev": "1000",
+          "min": "500",
+          "max": "8000",
+          "round": "-2",
+          "max_over_perc": "0.10",
+          "min_util": "0.05"
+        }
+      },
+      {
+        "key": "workload_pods_stg_dist",
+        "kind": "dist",
+        "label": "Pods Storage Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "1",
+          "stdev": "10",
+          "min": "0",
+          "max": "500",
+          "round": "0",
+          "max_over_perc": "0.10",
+          "min_util": "0.05"
+        }
+      },
+      {
+        "key": "workload_pods_bdw_dist",
+        "kind": "dist",
+        "label": "Pods Bandwidth Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "1000",
+          "stdev": "2000",
+          "min": "100",
+          "max": "10000",
+          "round": "-1",
+          "max_over_perc": "0.10",
+          "min_util": "0.05",
+          "request_prob": "0.3"
+        }
+      },
+      {
+        "key": "workload_pods_interarrival_dist",
+        "kind": "dist",
+        "label": "Pods Interarrival Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "poisson",
+          "mean": "5",
+          "min": "3",
+          "max": "6"
+        }
+      },
+      {
+        "key": "workload_pods_duration_dist",
+        "kind": "dist",
+        "label": "Pods Duration Distribution",
+        "required": true,
+        "defaultValue": {
+          "type": "poisson",
+          "mean": "10",
+          "min": "2",
+          "max": "20"
+        }
+      },
+      {
+        "key": "workload_pods_max_restarts",
+        "kind": "scalar",
+        "label": "Max Restarts",
+        "required": true,
+        "defaultValue": "5"
+      },
+      {
+        "key": "workload_warm_up_duration",
+        "kind": "dist",
+        "label": "Warm-Up Duration",
+        "required": true,
+        "defaultValue": {
+          "type": "poisson",
+          "mean": "2",
+          "min": "1",
+          "max": "3"
+        }
+      },
+      {
+        "key": "workload_warm_up_spike_factor",
+        "kind": "dist",
+        "label": "Warm-Up Spike Factor",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "0.3",
+          "stdev": "0.3",
+          "min": "0",
+          "max": "1",
+          "round": "3"
+        }
+      },
+      {
+        "key": "workload_smoothing_alpha",
+        "kind": "dist",
+        "label": "Smoothing Alpha",
+        "required": true,
+        "defaultValue": {
+          "type": "normal",
+          "mean": "0.5",
+          "stdev": "0.4",
+          "min": "0.4",
+          "max": "0.9",
+          "round": "3"
+        }
+      }
+    ]
+  },
+
+  "simulation": {
+    "fields": [
+      {
+        "key": "logging_output",
+        "kind": "dropdown",
+        "label": "Logging Output",
+        "required": true,
+        "options": ["1", "2", "3"],
+        "defaultValue": "3"
+      },
+      {
+        "key": "logging_level",
+        "kind": "dropdown",
+        "label": "Logging Level",
+        "required": true,
+        "options": ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"],
+        "defaultValue": "INFO"
+      },
+      {
+        "key": "simulation_speedup",
+        "kind": "scalar",
+        "label": "Simulation Speedup",
+        "required": true,
+        "defaultValue": "0"
+      },
+      {
+        "key": "simulation_seed",
+        "kind": "scalar",
+        "label": "Simulation Seed",
+        "required": true,
+        "defaultValue": "20"
+      },
+      {
+        "key": "simulation_save_trace",
+        "kind": "boolean",
+        "label": "Save Trace",
+        "required": true,
+        "defaultValue": "True"
+      },
+      {
+        "key": "simulation_save_basic_stats",
+        "kind": "boolean",
+        "label": "Save Basic Stats",
+        "required": true,
+        "defaultValue": "True"
+      },
+      {
+        "key": "simulation_save_detail_stats",
+        "kind": "boolean",
+        "label": "Save Detail Stats",
+        "required": true,
+        "defaultValue": "True"
+      },
+      {
+        "key": "simulation_save_node_utilization",
+        "kind": "boolean",
+        "label": "Save Node Utilization",
+        "required": true,
+        "defaultValue": "False"
+      },
+      {
+        "key": "simulation_node_utilization_interval",
+        "kind": "scalar",
+        "label": "Node Utilization Interval (s)",
+        "required": true,
+        "defaultValue": "1"
+      }
+    ]
+  },
+
+  "scheduler": {
+    "fields": [
+      {
+        "key": "scheduler_type",
+        "kind": "dropdown",
+        "label": "Scheduler Type",
+        "required": true,
+        "options": [
+          "ROUNDROBIN",
+          "DEFAULT",
+          "MOSTAVAILABLE",
+          "RANDOM",
+          "DAROINFER",
+          "DAROTRAIN"
+        ],
+        "defaultValue": "ROUNDROBIN"
+      },
+      {
+        "key": "scheduler_reward_type",
+        "kind": "dropdown",
+        "label": "Reward Type",
+        "required": true,
+        "options": [
+          "Coop_LB_reward",
+          "Cluster_LB_reward",
+          "Node_LB_reward",
+          "Fragmentation_reward",
+          "Bandwidth_reward",
+          "CompositeReward"
+        ],
+        "defaultValue": "CompositeReward",
+        "visibleWhen": { "field": "scheduler_type", "notIn": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_composite_reward_parts",
+        "kind": "multiselect",
+        "label": "Composite Reward Parts",
+        "required": true,
+        "options": [
+          "Coop_LB_reward",
+          "Cluster_LB_reward",
+          "Node_LB_reward",
+          "Fragmentation_reward",
+          "Bandwidth_reward"
+        ],
+        "defaultValue": ["Cluster_LB_reward", "Node_LB_reward", "Fragmentation_reward", "Bandwidth_reward"],
+        "visibleWhen": { "field": "scheduler_type", "notIn": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_composite_reward_weights",
+        "kind": "csv",
+        "label": "Composite Reward Weights",
+        "required": true,
+        "placeholder": "1, 1, 0, 0",
+        "defaultValue": "1, 1, 0, 0",
+        "visibleWhen": { "field": "scheduler_type", "notIn": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_save_rewards",
+        "kind": "boolean",
+        "label": "Save Rewards",
+        "required": true,
+        "defaultValue": "True",
+        "visibleWhen": { "field": "scheduler_type", "notIn": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_daro_features",
+        "kind": "multiselect",
+        "label": "DARO Features",
+        "required": true,
+        "options": ["cpu", "mem", "stg", "bdw", "cost"],
+        "defaultValue": ["cpu", "mem", "stg", "bdw"],
+        "visibleWhen": { "field": "scheduler_type", "in": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_daro_num_bids",
+        "kind": "scalar",
+        "label": "DARO Num Bids",
+        "required": true,
+        "defaultValue": "10",
+        "visibleWhen": { "field": "scheduler_type", "in": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_daro_infer_path",
+        "kind": "scalar",
+        "label": "DARO Infer Model Path",
+        "required": true,
+        "defaultValue": "models/model_marl_f12.pt",
+        "visibleWhen": { "field": "scheduler_type", "in": ["DAROINFER", "DAROTRAIN"] }
+      },
+      {
+        "key": "scheduler_daro_infer_epsilon",
+        "kind": "scalar",
+        "label": "DARO Infer Epsilon",
+        "required": true,
+        "defaultValue": "0",
+        "visibleWhen": { "field": "scheduler_type", "in": ["DAROINFER", "DAROTRAIN"] }
+      }
+    ]
+  }
+}

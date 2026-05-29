@@ -1,0 +1,429 @@
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-01
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: cloud
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-01
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 7400Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 7400Mbps
+    kubernetes.io/ingress-bandwidth: 7400Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 9200m
+    ephemeral-storage: 2000Gi
+    memory: 17900Mi
+    pods: '110'
+  allocatable:
+    cpu: 9200m
+    ephemeral-storage: 2000Gi
+    memory: 17900Mi
+    pods: '110'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-02
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: cloud
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-02
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 9300Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 9300Mbps
+    kubernetes.io/ingress-bandwidth: 9300Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 8300m
+    ephemeral-storage: 1800Gi
+    memory: 16300Mi
+    pods: '110'
+  allocatable:
+    cpu: 8300m
+    ephemeral-storage: 1800Gi
+    memory: 16300Mi
+    pods: '110'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-03
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: cloud
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-03
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 8300Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 8300Mbps
+    kubernetes.io/ingress-bandwidth: 8300Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 7500m
+    ephemeral-storage: 3200Gi
+    memory: 13800Mi
+    pods: '110'
+  allocatable:
+    cpu: 7500m
+    ephemeral-storage: 3200Gi
+    memory: 13800Mi
+    pods: '110'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-04
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: cloud
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-04
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 10000Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 10000Mbps
+    kubernetes.io/ingress-bandwidth: 10000Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 7100m
+    ephemeral-storage: 2000Gi
+    memory: 14300Mi
+    pods: '110'
+  allocatable:
+    cpu: 7100m
+    ephemeral-storage: 2000Gi
+    memory: 14300Mi
+    pods: '110'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-05
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: edge
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-05
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 900Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 900Mbps
+    kubernetes.io/ingress-bandwidth: 900Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 5300m
+    ephemeral-storage: 550Gi
+    memory: 7900Mi
+    pods: '50'
+  allocatable:
+    cpu: 5300m
+    ephemeral-storage: 550Gi
+    memory: 7900Mi
+    pods: '50'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-06
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: edge
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-06
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 1090Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 1090Mbps
+    kubernetes.io/ingress-bandwidth: 1090Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 3400m
+    ephemeral-storage: 550Gi
+    memory: 9000Mi
+    pods: '50'
+  allocatable:
+    cpu: 3400m
+    ephemeral-storage: 550Gi
+    memory: 9000Mi
+    pods: '50'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-07
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: edge
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-07
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 1190Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 1190Mbps
+    kubernetes.io/ingress-bandwidth: 1190Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 5200m
+    ephemeral-storage: 450Gi
+    memory: 7300Mi
+    pods: '50'
+  allocatable:
+    cpu: 5200m
+    ephemeral-storage: 450Gi
+    memory: 7300Mi
+    pods: '50'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-08
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: iot
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-08
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 380Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 380Mbps
+    kubernetes.io/ingress-bandwidth: 380Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 1100m
+    ephemeral-storage: 8Gi
+    memory: 2100Mi
+    pods: '30'
+  allocatable:
+    cpu: 1100m
+    ephemeral-storage: 8Gi
+    memory: 2100Mi
+    pods: '30'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-09
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: iot
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-09
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 470Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 470Mbps
+    kubernetes.io/ingress-bandwidth: 470Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 1200m
+    ephemeral-storage: 8Gi
+    memory: 2100Mi
+    pods: '30'
+  allocatable:
+    cpu: 1200m
+    ephemeral-storage: 8Gi
+    memory: 2100Mi
+    pods: '30'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: node-10
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    hyperai.eu/type: iot
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node-10
+    kubernetes.io/os: linux
+    kubernetes.io/role: agent
+    node-role.kubernetes.io/agent: ''
+  annotations:
+    hyperai.eu/bandwidth: 420Mbps
+    hyperai.eu/node-monetary-cost-category: very low
+    kubernetes.io/egress-bandwidth: 420Mbps
+    kubernetes.io/ingress-bandwidth: 420Mbps
+    kwok.x-k8s.io/node: fake
+    node.alpha.kubernetes.io/ttl: '0'
+spec:
+  taints:
+  - effect: NoSchedule
+    key: kwok.x-k8s.io/node
+    time_added: null
+    value: fake
+status:
+  capacity:
+    cpu: 700m
+    ephemeral-storage: 9Gi
+    memory: 1000Mi
+    pods: '30'
+  allocatable:
+    cpu: 700m
+    ephemeral-storage: 9Gi
+    memory: 1000Mi
+    pods: '30'
+  conditions:
+  - type: Ready
+    status: 'True'
+    reason: KubeletReady
+    message: Replay node

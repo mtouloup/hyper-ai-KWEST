@@ -1,0 +1,232 @@
+{
+  "logging_output": 3,
+  "logging_level": "INFO",
+  "cluster_type": "Python",
+  "cluster_reset": true,
+  "cluster_nodes_cloud": 4,
+  "cluster_nodes_edge": 4,
+  "cluster_nodes_iot": 4,
+  "cluster_node_cloud_cpu_dist": {
+    "type": "normal",
+    "mean": 24000,
+    "stdev": 8000,
+    "min": 8000,
+    "max": 64000,
+    "round": -2
+  },
+  "cluster_node_cloud_mem_dist": {
+    "type": "normal",
+    "mean": 48000,
+    "stdev": 16000,
+    "min": 16000,
+    "max": 128000,
+    "round": -2
+  },
+  "cluster_node_cloud_stg_dist": {
+    "type": "normal",
+    "mean": 4000,
+    "stdev": 2000,
+    "min": 1000,
+    "max": 10000,
+    "round": -2
+  },
+  "cluster_node_cloud_bdw_dist": {
+    "type": "normal",
+    "mean": 10000,
+    "stdev": 4000,
+    "min": 1000,
+    "max": 100000,
+    "round": -2
+  },
+  "cluster_node_cloud_max_pods": 110,
+  "cluster_node_edge_cpu_dist": {
+    "type": "normal",
+    "mean": 6000,
+    "stdev": 2000,
+    "min": 3000,
+    "max": 10000,
+    "round": -2
+  },
+  "cluster_node_edge_mem_dist": {
+    "type": "normal",
+    "mean": 12000,
+    "stdev": 4000,
+    "min": 6000,
+    "max": 20000,
+    "round": -2
+  },
+  "cluster_node_edge_stg_dist": {
+    "type": "normal",
+    "mean": 500,
+    "stdev": 250,
+    "min": 50,
+    "max": 2000,
+    "round": -1
+  },
+  "cluster_node_edge_bdw_dist": {
+    "type": "normal",
+    "mean": 1000,
+    "stdev": 200,
+    "min": 200,
+    "max": 10000,
+    "round": -1
+  },
+  "cluster_node_edge_max_pods": 50,
+  "cluster_node_iot_cpu_dist": {
+    "type": "normal",
+    "mean": 2000,
+    "stdev": 500,
+    "min": 500,
+    "max": 4000,
+    "round": -2
+  },
+  "cluster_node_iot_mem_dist": {
+    "type": "normal",
+    "mean": 4000,
+    "stdev": 1000,
+    "min": 1000,
+    "max": 8000,
+    "round": -2
+  },
+  "cluster_node_iot_stg_dist": {
+    "type": "normal",
+    "mean": 16,
+    "stdev": 4,
+    "min": 1,
+    "max": 32,
+    "round": 0
+  },
+  "cluster_node_iot_bdw_dist": {
+    "type": "normal",
+    "mean": 500,
+    "stdev": 200,
+    "min": 100,
+    "max": 1000,
+    "round": -1
+  },
+  "cluster_node_iot_max_pods": 30,
+  "workload_tasks": 40,
+  "workload_pods_number_dist": {
+    "type": "fixed",
+    "value": 5
+  },
+  "workload_pods_cpu_dist": {
+    "type": "normal",
+    "mean": 1000,
+    "stdev": 1000,
+    "min": 500,
+    "max": 4000,
+    "round": -2,
+    "max_over_perc": 0.1,
+    "min_util": 0.05
+  },
+  "workload_pods_mem_dist": {
+    "type": "normal",
+    "mean": 2000,
+    "stdev": 1000,
+    "min": 500,
+    "max": 8000,
+    "round": -2,
+    "max_over_perc": 0.1,
+    "min_util": 0.05
+  },
+  "workload_pods_stg_dist": {
+    "type": "normal",
+    "mean": 1,
+    "stdev": 10,
+    "min": 0,
+    "max": 500,
+    "round": 0,
+    "max_over_perc": 0.1,
+    "min_util": 0.05
+  },
+  "workload_pods_bdw_dist": {
+    "type": "normal",
+    "mean": 1000,
+    "stdev": 2000,
+    "min": 100,
+    "max": 10000,
+    "round": -1,
+    "max_over_perc": 0.1,
+    "min_util": 0.05,
+    "request_prob": 0.3
+  },
+  "workload_pods_interarrival_dist": {
+    "type": "poisson",
+    "mean": 3,
+    "min": 2,
+    "max": 6
+  },
+  "workload_pods_duration_dist": {
+    "type": "poisson",
+    "mean": 30,
+    "min": 5,
+    "max": 60
+  },
+  "workload_pods_max_restarts": 5,
+  "workload_warm_up_duration": {
+    "type": "poisson",
+    "mean": 2,
+    "min": 1,
+    "max": 3
+  },
+  "workload_warm_up_spike_factor": {
+    "type": "normal",
+    "mean": 0.3,
+    "stdev": 0.3,
+    "min": 0,
+    "max": 1,
+    "round": 3
+  },
+  "workload_smoothing_alpha": {
+    "type": "normal",
+    "mean": 0.5,
+    "stdev": 0.4,
+    "min": 0.4,
+    "max": 0.9,
+    "round": 3
+  },
+  "simulation_speedup": 0,
+  "simulation_seed": 20,
+  "simulation_save_trace": true,
+  "simulation_save_basic_stats": true,
+  "simulation_save_detail_stats": true,
+  "simulation_save_node_utilization": false,
+  "simulation_node_utilization_interval": 1,
+  "scheduler_type": "DEFAULT",
+  "scheduler_reward_type": "CompositeReward",
+  "scheduler_composite_reward_parts": [
+    "Cluster_LB_reward",
+    "Node_LB_reward",
+    "Fragmentation_reward",
+    "Bandwidth_reward"
+  ],
+  "scheduler_composite_reward_weights": [1, 1, 0, 0],
+  "scheduler_save_rewards": true,
+  "scheduler_daro_features": ["cpu", "mem", "stg", "bdw"],
+  "scheduler_daro_num_bids": 10,
+  "scheduler_daro_infer_path": "models/model_marl_f12.pt",
+  "scheduler_daro_infer_epsilon": 0,
+  "scheduler_daro_max_agents": -1,
+  "scheduler_daro_hidden_dims": 64,
+  "scheduler_daro_LearningRate": 0.005,
+  "scheduler_daro_GAMMA": 0.99,
+  "scheduler_daro_Update_target_every": 200,
+  "scheduler_daro_DoubleQ": true,
+  "scheduler_daro_Epsilon": 0.1,
+  "scheduler_daro_Replay_buffer_size": 5000,
+  "scheduler_daro_BatchSize": 32,
+  "scheduler_daro_Mixing_embed_dim": 32,
+  "scheduler_daro_Hypernet_layers": 2,
+  "scheduler_daro_Hypernet_embed": 64,
+  "scheduler_daro_bypass_action": false,
+  "training_episodes": 10,
+  "training_cloud_nodes_per_episode_min": 2,
+  "training_cloud_nodes_per_episode_max": 4,
+  "training_edge_nodes_per_episode_min": 2,
+  "training_edge_nodes_per_episode_max": 3,
+  "training_iot_nodes_per_episode_min": 2,
+  "training_iot_nodes_per_episode_max": 3,
+  "training_tasks_per_episode_min": 4,
+  "training_tasks_per_episode_max": 8
+}

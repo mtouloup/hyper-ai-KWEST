@@ -1,0 +1,237 @@
+# Copyright (c) 2026 CUT and HES-SO
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Logging
+logging_output: 3 # 1 = Console, 2 = File, 3 = Both
+logging_level: INFO # CRITICAL, ERROR, WARNING, INFO, DEBUG
+
+# Cluster
+cluster_type: KWOK # KWOK or Python or K8s
+cluster_reset: True # True: Clear existing cluster, False: Append to existing cluster
+
+# Cluster Node Counts
+cluster_nodes_cloud: 4
+cluster_nodes_edge: 4
+cluster_nodes_iot: 4
+
+# Cloud Node Profile
+cluster_node_cloud_cpu_dist: {
+    type: normal,
+    mean: 24000,
+    stdev: 8000,
+    min: 8000,
+    max: 64000,
+    round: -2,
+  } # in millicores
+cluster_node_cloud_mem_dist: {
+    type: normal,
+    mean: 48000,
+    stdev: 16000,
+    min: 16000,
+    max: 128000,
+    round: -2,
+  } # in Mi
+cluster_node_cloud_stg_dist: {
+    type: normal,
+    mean: 4000,
+    stdev: 2000,
+    min: 1000,
+    max: 10000,
+    round: -2,
+  } # in Gi
+cluster_node_cloud_bdw_dist: {
+    type: normal,
+    mean: 10000,
+    stdev: 4000,
+    min: 1000,
+    max: 100000,
+    round: -2,
+  } # in Mbps
+cluster_node_cloud_max_pods: 110
+
+# Edge Node Profile
+cluster_node_edge_cpu_dist: {
+    type: normal,
+    mean: 6000,
+    stdev: 2000,
+    min: 3000,
+    max: 10000,
+    round: -2,
+  } # in millicores
+cluster_node_edge_mem_dist: {
+    type: normal,
+    mean: 12000,
+    stdev: 4000,
+    min: 6000,
+    max: 20000,
+    round: -2,
+  } # in Mi
+cluster_node_edge_stg_dist: {
+    type: normal,
+    mean: 500,
+    stdev: 250,
+    min: 50,
+    max: 2000,
+    round: -1,
+  } # in Gi
+cluster_node_edge_bdw_dist: {
+    type: normal,
+    mean: 1000,
+    stdev: 200,
+    min: 200,
+    max: 10000,
+    round: -1,
+  } # in Mbps
+cluster_node_edge_max_pods: 50
+
+# IoT Node Profile
+cluster_node_iot_cpu_dist: {
+    type: normal,
+    mean: 2000,
+    stdev: 500,
+    min: 500,
+    max: 4000,
+    round: -2,
+  } # in millicores
+cluster_node_iot_mem_dist: {
+    type: normal,
+    mean: 4000,
+    stdev: 1000,
+    min: 1000,
+    max: 8000,
+    round: -2,
+  } # in Mi
+cluster_node_iot_stg_dist: {
+    type: normal,
+    mean: 16,
+    stdev: 4,
+    min: 1,
+    max: 32,
+    round: 0,
+  } # in Gi
+cluster_node_iot_bdw_dist: {
+    type: normal,
+    mean: 500,
+    stdev: 200,
+    min: 100,
+    max: 1000,
+    round: -1,
+  } # in Mbps
+cluster_node_iot_max_pods: 30
+
+# Workload
+workload_tasks: 40
+workload_pods_number_dist: { type: fixed, value: 5 } # Distribution of number of pods in each task
+workload_pods_cpu_dist: {
+    type: normal,
+    mean: 1000,
+    stdev: 1000,
+    min: 500,
+    max: 4000,
+    round: -2,
+    max_over_perc: 0.10,
+    min_util: 0.05,
+  } # in millicores
+workload_pods_mem_dist: {
+    type: normal,
+    mean: 2000,
+    stdev: 1000,
+    min: 500,
+    max: 8000,
+    round: -2,
+    max_over_perc: 0.10,
+    min_util: 0.05,
+  } # in Mi
+workload_pods_stg_dist: {
+    type: normal,
+    mean: 1,
+    stdev: 10,
+    min: 0,
+    max: 500,
+    round: 0,
+    max_over_perc: 0.10,
+    min_util: 0.05,
+  } # in Gi
+workload_pods_bdw_dist: {
+    type: normal,
+    mean: 1000,
+    stdev: 2000,
+    min: 100,
+    max: 10000,
+    round: -1,
+    max_over_perc: 0.10,
+    min_util: 0.05,
+    request_prob: 0.3,
+  } # in Mbps
+workload_pods_interarrival_dist: { type: poisson, mean: 3, min: 2, max: 6 } # in seconds
+workload_pods_duration_dist: { type: poisson, mean: 30, min: 5, max: 60 } # in seconds
+workload_pods_max_restarts: 5 # The number of times a pending pod can be restarted (Crashloop error of K8s)
+workload_warm_up_duration: { type: poisson, mean: 2, min: 1, max: 3 }
+workload_warm_up_spike_factor:
+  { type: normal, mean: 0.3, stdev: 0.3, min: 0, max: 1, round: 3 }
+workload_smoothing_alpha:
+  { type: normal, mean: 0.5, stdev: 0.4, min: 0.4, max: 0.9, round: 3 }
+
+# Simulation
+simulation_speedup: 0 # 1=real-time, 0=infinite, other numbers=speedup factor
+simulation_seed: 20 # Empty for fully random, any other number for reproduciable runs
+simulation_save_trace: True # Save simulation trace in csv
+simulation_save_basic_stats: True # Save basic statistics of simulation in csv
+simulation_save_detail_stats: True # Save detailed statistics of simulation in csv
+simulation_save_node_utilization: False # Save per node utilization during simulation intervals in csv
+simulation_node_utilization_interval: 1 # Time interval (in seconds) to record node utilization
+
+# Scheduler
+scheduler_type: ROUNDROBIN # ROUNDROBIN or DEFAULT or MOSTAVAILABLE or RANDOM or DAROINFER or DAROTRAIN
+scheduler_reward_type: CompositeReward # Coop_LB_reward or Cluster_LB_reward or Node_LB_reward or Fragmentation_reward or Bandwidth_reward or CompositeReward
+scheduler_composite_reward_parts: [
+    Cluster_LB_reward,
+    Node_LB_reward,
+    Fragmentation_reward,
+    Bandwidth_reward,
+  ] # Rewards to use with CompositeReward
+scheduler_composite_reward_weights: [1, 1, 0, 0] # Reward weights to use with CompositeReward
+scheduler_save_rewards: True # Save rewards in csv
+scheduler_daro_features: [cpu, mem, stg, bdw] # Features to use for observations/state; cpu, mem, stg, bdw, cost
+scheduler_daro_num_bids: 10 # actions/bids
+scheduler_daro_infer_path: "models/model_marl_f12.pt" # path of saved model for DAROINFER
+scheduler_daro_infer_epsilon: 0 # Epsilon greedy behaviour for Inference
+
+# Traning parameters for DAROTRAIN
+scheduler_daro_max_agents: -1 # -1 means to use cluster size
+scheduler_daro_hidden_dims: 64
+scheduler_daro_LearningRate: 0.005
+scheduler_daro_GAMMA: 0.99
+scheduler_daro_Update_target_every: 200
+scheduler_daro_DoubleQ: True
+scheduler_daro_Epsilon: 0.1
+scheduler_daro_Replay_buffer_size: 5000
+scheduler_daro_BatchSize: 32
+scheduler_daro_Mixing_embed_dim: 32
+scheduler_daro_Hypernet_layers: 2
+scheduler_daro_Hypernet_embed: 64
+scheduler_daro_bypass_action: False # To bypass getting node from DARO, instead we get a node from the mentioned scheduler.
+
+# Traning
+training_episodes: 10 # Number of training episodes
+training_cloud_nodes_per_episode_min: 2
+training_cloud_nodes_per_episode_max: 4
+training_edge_nodes_per_episode_min: 2
+training_edge_nodes_per_episode_max: 3
+training_iot_nodes_per_episode_min: 2
+training_iot_nodes_per_episode_max: 3
+training_tasks_per_episode_min: 4 # Min number of tasks per episode
+training_tasks_per_episode_max: 8 # Max number of tasks per episode

@@ -1,0 +1,254 @@
+{
+  "runId": "run_2881db28",
+  "name": "run_2881db28",
+  "status": "completed",
+  "simConfigPath": "/var/folders/72/mz24xy553xj3ss0rqjmnm60c0000gn/T/sim-runs/run_2881db28/config.yaml",
+  "nodesConfig": null,
+  "errorMessage": null,
+  "startedAt": "2026-02-04T16:05:21.451Z",
+  "finishedAt": "2026-02-04T16:08:36.167Z",
+  "trace": null,
+  "simulatorPid": 35816,
+  "basicStatsTables": {
+    "Simulation metadata": [
+      {
+        "metric": "userid",
+        "value": ""
+      },
+      {
+        "metric": "id",
+        "value": "1770221315190"
+      },
+      {
+        "metric": "cluster_type",
+        "value": "K8S"
+      },
+      {
+        "metric": "scheduler_type",
+        "value": "default"
+      }
+    ],
+    "Cluster composition": [
+      {
+        "metric": "num_nodes",
+        "value": "4"
+      },
+      {
+        "metric": "cloud_nodes",
+        "value": "4"
+      },
+      {
+        "metric": "edge_nodes",
+        "value": "0"
+      },
+      {
+        "metric": "iot_nodes",
+        "value": "0"
+      }
+    ],
+    "Workload totals & outcomes": [
+      {
+        "metric": "total_tasks",
+        "value": "20"
+      },
+      {
+        "metric": "total_pods",
+        "value": "38"
+      },
+      {
+        "metric": "completed_pods",
+        "value": "25"
+      },
+      {
+        "metric": "failed_pods",
+        "value": "13"
+      },
+      {
+        "metric": "retried_pods",
+        "value": "9"
+      },
+      {
+        "metric": "failure_rate",
+        "value": "0.3421"
+      },
+      {
+        "metric": "retry_rate",
+        "value": "0.36"
+      }
+    ],
+    "Wait time": [
+      {
+        "metric": "min_wait_time",
+        "value": "0"
+      },
+      {
+        "metric": "max_wait_time",
+        "value": "9"
+      },
+      {
+        "metric": "avg_wait_time",
+        "value": "0.4"
+      }
+    ],
+    "Latency": [
+      {
+        "metric": "min_latency",
+        "value": "2"
+      },
+      {
+        "metric": "max_latency",
+        "value": "15"
+      },
+      {
+        "metric": "avg_latency",
+        "value": "6.04"
+      }
+    ],
+    "Slowdown / throughput": [
+      {
+        "metric": "min_slowdown",
+        "value": "1.0"
+      },
+      {
+        "metric": "max_slowdown",
+        "value": "2.5"
+      },
+      {
+        "metric": "avg_slowdown",
+        "value": "1.07"
+      },
+      {
+        "metric": "throughput",
+        "value": "0.2717"
+      },
+      {
+        "metric": "makespan",
+        "value": "88"
+      }
+    ],
+    "Capacity": [
+      {
+        "metric": "min_cpu_capacity",
+        "value": "8000"
+      },
+      {
+        "metric": "max_cpu_capacity",
+        "value": "8000"
+      },
+      {
+        "metric": "avg_cpu_capacity",
+        "value": "8000.0"
+      },
+      {
+        "metric": "min_mem_capacity",
+        "value": "3918"
+      },
+      {
+        "metric": "max_mem_capacity",
+        "value": "3918"
+      },
+      {
+        "metric": "avg_mem_capacity",
+        "value": "3918.0"
+      },
+      {
+        "metric": "min_stg_capacity",
+        "value": "1007"
+      },
+      {
+        "metric": "max_stg_capacity",
+        "value": "1007"
+      },
+      {
+        "metric": "avg_stg_capacity",
+        "value": "1007.0"
+      }
+    ],
+    "Utilization (CPU)": [
+      {
+        "metric": "min_cpu_util",
+        "value": "0.0"
+      },
+      {
+        "metric": "max_cpu_util",
+        "value": "0.425"
+      },
+      {
+        "metric": "avg_cpu_util",
+        "value": "0.0868"
+      },
+      {
+        "metric": "avg_cpu_std",
+        "value": "0.09"
+      }
+    ],
+    "Utilization (Mem)": [
+      {
+        "metric": "min_mem_util",
+        "value": "0.0"
+      },
+      {
+        "metric": "max_mem_util",
+        "value": "0.9188"
+      },
+      {
+        "metric": "avg_mem_util",
+        "value": "0.2082"
+      },
+      {
+        "metric": "avg_mem_std",
+        "value": "0.2138"
+      }
+    ],
+    "Utilization (Storage)": [
+      {
+        "metric": "min_stg_util",
+        "value": "0.0"
+      },
+      {
+        "metric": "max_stg_util",
+        "value": "0.0357"
+      },
+      {
+        "metric": "avg_stg_util",
+        "value": "0.0035"
+      },
+      {
+        "metric": "avg_stg_std",
+        "value": "0.004"
+      }
+    ],
+    "Concurrency": [
+      {
+        "metric": "min_active_pods",
+        "value": "0.0"
+      },
+      {
+        "metric": "max_active_pods",
+        "value": "5.0"
+      },
+      {
+        "metric": "avg_active_pods",
+        "value": "1.5326"
+      },
+      {
+        "metric": "std_active_pods",
+        "value": "1.2892"
+      }
+    ],
+    "Balance / fragmentation": [
+      {
+        "metric": "cluster_wide_load_balance",
+        "value": "0.8947"
+      },
+      {
+        "metric": "node_local_load_balance",
+        "value": "0.8301"
+      },
+      {
+        "metric": "resource_fragmentation",
+        "value": "0.8343"
+      }
+    ]
+  }
+}
