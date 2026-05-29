@@ -257,6 +257,8 @@ With a pod baseline duration of 30 s:
 - `simulation_trace.csv` gains a `Pod_effective_duration` column alongside the existing `Pod_duration` (baseline) column.
 - `simulation_basic_stats.csv` gains three new fields: `avg_baseline_duration`, `avg_effective_duration`, and `avg_execution_slowdown`.
 
+> **Note:** Both loggers append to existing CSV files across runs. If you have output files from a previous version of the simulator, delete them before running so the updated headers are written from scratch.
+
 ---
 
 ## Contact

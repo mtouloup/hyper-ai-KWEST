@@ -140,7 +140,7 @@ class K8sCluster(KubeClusterBase):
     # Manifest builder (sleep)
     def _pod_to_k8s_object(self, pod: Pod, node: Optional[Node]) -> client.V1Pod:
         resources, annotations = self.format_resource_dict_for_k8s(pod.resources)
-        sleep_cmd = ["sh", "-c", f"sleep {max(int(pod.duration), 1)}"]
+        sleep_cmd = ["sh", "-c", f"sleep {max(int(pod.effective_duration), 1)}"]
 
         metadata = client.V1ObjectMeta(
             name=pod.name,
